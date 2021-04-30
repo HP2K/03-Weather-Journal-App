@@ -10,8 +10,10 @@ let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 // Event Listener on generate button
 document.getElementById('generate').addEventListener('click', performAction);
 
+
 //Function to get web api data
 function performAction(e){  
+  let zip = document.getElementById('zip').value;
     getWeather(baseURL,zip, apiKey)
   }
 const getWeather = async (baseURL, zip, apiKey) => {
