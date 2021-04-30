@@ -9,10 +9,10 @@ const express = require ('express');
 const app = express ();
 
 
-/* Dependencies */
+// Dependencies 
 const bodyParser = require ('body-parser');
-/* Middleware*/
-//Here we are configuring express to use body-parser as middle-ware.
+
+// Middleware - Configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -29,3 +29,12 @@ const port = 3000;
 // Spin up the server
 const server = app.listen(port, () => console.log(`Running on localhost: ${port}`));
 
+// GET route 
+app.get('/item', (req, res) => {
+  res.send(projectData);
+});
+
+// POST route
+app.post('/item', (req, res) => {
+  projectData = req.body;
+});
