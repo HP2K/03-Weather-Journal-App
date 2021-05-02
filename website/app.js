@@ -12,7 +12,7 @@ document.getElementById('generate').addEventListener('click', performAction);
 
 
 //Function to get web api data
-function performAction(e){  
+async function performAction(e){  
   let zip = document.getElementById('zip').value;
     const data = await getWeather(baseURL,zip, apiKey)
     console.log(data);
