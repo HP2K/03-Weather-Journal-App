@@ -7,11 +7,10 @@ let apiKey = '&units=metric&appid=5fc069c6cbb6add77842ae6227652287';
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
-// Event Listener on generate button
+// Event listener on generate button
 document.getElementById('generate').addEventListener('click', performAction);
 
-
-//Function to get web api data
+// Function to get web api data
 async function performAction(e){  
   let zip = document.getElementById('zip').value;
     const data = await getWeather(baseURL,zip, apiKey)
@@ -28,6 +27,15 @@ const getWeather = async (baseURL, zip, apiKey) => {
     }
   }
 
+// Add data
+.then(function(data){
+    console.log(data);
+  postData('/addWeather', {date:data.date, temp: data.temp, contn:favFact} );
+
+  // Update UI
+  updateUI()
+})
+
   // Post data
  const postData = async ( url = '', data = {})=>{
 
@@ -43,6 +51,20 @@ const getWeather = async (baseURL, zip, apiKey) => {
     const newData = await response.json();
     return newData
     }catch(error) {
+    console.log("error", error);
+  }
+}
+
+// Update UI
+const updateUI = async () => {
+  const request = await fetch('/all');
+  try{
+    const allData = await request.json();
+    document.getElementById('date').innerHTML = allData[0].date;
+    document.getElementById('temp').innerHTML = allData[0].temp;
+    document.getElementById('content').innerHTML = allData[0].content;
+
+  }catch(error){
     console.log("error", error);
   }
 }
