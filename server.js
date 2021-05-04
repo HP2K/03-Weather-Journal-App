@@ -43,11 +43,11 @@ function addWeather(req,res){
 
   newEntry = { 
     date: req.body.date,
-    temp: req.body.fact,
+    temp: req.body.temp,
     content: req.body.content
    }
 
-   animalData.push(newEntry)
-   res.send(addData)
-   console.log(addData);
+   weatherData.push(newEntry)
+   res.send(weatherData)
+   console.log(weatherData);
 }

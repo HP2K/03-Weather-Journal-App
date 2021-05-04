@@ -15,6 +15,9 @@ async function performAction(e){
   let zip = document.getElementById('zip').value;
     const data = await getWeather(baseURL,zip, apiKey)
     console.log(data);
+    // add data + update UI
+    await  postData('/addWeather', {date:data.date, temp:data.temp, content:data.content} );
+    updateUI();
   }
 const getWeather = async (baseURL, zip, apiKey) => {
     
@@ -26,15 +29,6 @@ const getWeather = async (baseURL, zip, apiKey) => {
        console.log("error", error);
     }
   }
-
-// Add data
-.then(function(data){
-    console.log(data);
-  postData('/addWeather', {date:data.date, temp: data.temp, contn:favFact} );
-
-  // Update UI
-  updateUI()
-})
 
   // Post data
  const postData = async ( url = '', data = {})=>{
