@@ -1,13 +1,10 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {};
 
 // Require Express to run server and routes
 const express = require ('express');
 
-
 // Start up an instance of app
 const app = express ();
-
 
 // Dependencies 
 const bodyParser = require ('body-parser');
@@ -23,18 +20,34 @@ app.use(cors());
 // Initialize the main project folder
 app.use(express.static('website'));
 
-
 // Setup Server
 const port = 3000;
 // Spin up the server
 const server = app.listen(port, () => console.log(`Running on localhost: ${port}`));
 
-// GET route 
-app.get('/item', (req, res) => {
-  res.send(projectData);
-});
+
+const weatherData = {};
+
+/// GET route
+app.get('/all', getData);
+
+function getData (req, res) {
+  res.send(weatherData);
+  console.log(weatherData)
+}
 
 // POST route
-app.post('/item', (req, res) => {
-  projectData = req.body;
-});
+app.post('/addWeather', addWeather);
+
+function addWeather(req,res){
+
+  newEntry = { 
+    date: req.body.date,
+    temp: req.body.fact,
+    content: req.body.content
+   }
+
+   animalData.push(newEntry)
+   res.send(addData)
+   console.log(addData);
+}
