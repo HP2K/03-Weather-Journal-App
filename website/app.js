@@ -10,15 +10,20 @@ let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 // Event listener on generate button
 document.getElementById('generate').addEventListener('click', performAction);
 
-// Function to get web api data
+// Function event listner 
 async function performAction(e){  
   let zip = document.getElementById('zip').value;
-    const data = await getWeather(baseURL,zip, apiKey)
-    console.log(data);
-    // add data + update UI
-    await  postData('/addWeather', {date:data.date, temp:data.temp, content:data.content} );
-    updateUI();
+  let feelings = document.getElementById('feelings').value;
+  const data = await getWeather(baseURL,zip, apiKey)
+  let temperature = data.main.temp
+  let feel = feelings;
+  console.log(data);
+  // add data + update UI
+  await  postData('/addWeather', { date:newDate, temp:temperature, feelings:feel} );
+  updateUI();
   }
+
+// GET API data
 const getWeather = async (baseURL, zip, apiKey) => {
     
     const response = await fetch (baseURL+zip+apiKey)
@@ -30,7 +35,7 @@ const getWeather = async (baseURL, zip, apiKey) => {
     }
   }
 
-  // Post data
+  // POST API data
  const postData = async ( url = '', data = {})=>{
 
     const response = await fetch(url, {
@@ -54,9 +59,9 @@ const updateUI = async () => {
   const request = await fetch('/all');
   try{
     const allData = await request.json();
-    document.getElementById('date').innerHTML = allData[0].date;
-    document.getElementById('temp').innerHTML = allData[0].temp;
-    document.getElementById('content').innerHTML = allData[0].content;
+    document.getElementById('date').innerHTML = allData.date;
+    document.getElementById('temp').innerHTML = allData.temp;
+    document.getElementById('content').innerHTML = allData.content;
 
   }catch(error){
     console.log("error", error);

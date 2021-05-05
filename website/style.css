@@ -26,10 +26,11 @@ body{
     padding-left: 24px;
     padding-top: 24px;
     padding-bottom: 100px;
+    height: auto;
 }
 
 #entryHolder{
-    padding: 24px;
+    padding-top: 24px;
 }
 
 #date{
@@ -65,6 +66,7 @@ body{
 .title{
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
 }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
