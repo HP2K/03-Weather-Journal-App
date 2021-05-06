@@ -38,17 +38,6 @@ function getData (req, res) {
 }
 
 // POST route
-app.post('/addWeather', addWeather);
-
-function addWeather(req,res){
-
-  newEntry = { 
-    date: req.body.date,
-    temp: req.body.temp,
-    content: req.body.content
-   }
-
-   weatherData.push(newEntry)
-   res.send(weatherData)
-   console.log(weatherData);
-}
+app.post("/addWeather", (req, res) => {
+  projectData = req.body;
+});

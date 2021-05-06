@@ -14,10 +14,11 @@ document.getElementById('generate').addEventListener('click', performAction);
 async function performAction(e){  
   let zip = document.getElementById('zip').value;
   let feelings = document.getElementById('feelings').value;
-  const data = await getWeather(baseURL,zip, apiKey)
-  let temperature = data.main.temp
   let feel = feelings;
-  console.log(data);
+  const data = await getWeather(baseURL,zip, apiKey)
+  const temperature = data.main.temp;
+  
+  
   // add data + update UI
   await  postData('/addWeather', { date:newDate, temp:temperature, feelings:feel} );
   updateUI();
