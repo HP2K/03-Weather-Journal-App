@@ -29,12 +29,12 @@ const server = app.listen(port, () => console.log(`Running on localhost: ${port}
 
 let weatherData = {};
 
-/// GET route
+/// GET route 
 app.get('/all', getData);
 
 function getData (req, res) {
-  res.send(weatherData);
-  console.log(weatherData)
+  res.send(projectData);
+  console.log(projectData)
 }
 
 // POST route
