@@ -15,23 +15,23 @@ async function performAction(e){
   let zip = document.getElementById('zip').value;
   let feelings = document.getElementById('feelings').value;
   getWeather (baseURL, zip, apiKey)
-  .then (function (weatherData) {
-      const temperature = weatherData.main.temp;
-      const feeling = feelings;
-  
+  .then (function (data) {
+    let temperature = data.main.temp;
+    let feel = feelings;
   
   // add data + update UI
-  postData('/addWeather', { date:newDate, temp:temperature, feelings:feel} );
-  updateUI();
-  }
+  postData('/addWeather', { date:newDate, temp:temperature, feel:feel} );
+  updateUI()
+});  
+}
 
 // GET API data
 const getWeather = async (baseURL, zip, apiKey) => {
     
     const response = await fetch (baseURL+zip+apiKey)
     try{
-       const getWeather = await response.json();
-       return getWeather;
+       const data = await response.json();
+       return data;
     }catch(error){
        console.log("error", error);
     }
@@ -58,14 +58,14 @@ const getWeather = async (baseURL, zip, apiKey) => {
 
 // Update UI
 const updateUI = async () => {
-  const request = await fetch('/all');
+  const request = await fetch('/getWeather');
   try{
     const allData = await request.json();
     document.getElementById('date').innerHTML = allData.date;
     document.getElementById('temp').innerHTML = allData.temp;
-    document.getElementById('content').innerHTML = allData.content;
+    document.getElementById('content').innerHTML = allData.feel;
 
   }catch(error){
     console.log("error", error);
   }
-}
+};

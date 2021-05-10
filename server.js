@@ -26,18 +26,15 @@ const port = 3000;
 // Spin up the server
 const server = app.listen(port, () => console.log(`Running on localhost: ${port}`));
 
-
-let weatherData = {};
-
 /// GET route 
-app.get('/all', getData);
+app.get('/getWeather', (req, res) => {
 
-function getData (req, res) {
   res.send(projectData);
   console.log(projectData)
-}
+});
 
 // POST route
 app.post("/addWeather", (req, res) => {
   projectData = req.body;
+  res.send(projectData);
 });
