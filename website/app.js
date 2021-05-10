@@ -14,13 +14,14 @@ document.getElementById('generate').addEventListener('click', performAction);
 async function performAction(e){  
   let zip = document.getElementById('zip').value;
   let feelings = document.getElementById('feelings').value;
-  let feel = feelings;
-  const data = await getWeather(baseURL,zip, apiKey)
-  const temperature = data.main.temp;
+  getWeather (baseURL, zip, apiKey)
+  .then (function (weatherData) {
+      const temperature = weatherData.main.temp;
+      const feeling = feelings;
   
   
   // add data + update UI
-  await  postData('/addWeather', { date:newDate, temp:temperature, feelings:feel} );
+  postData('/addWeather', { date:newDate, temp:temperature, feelings:feel} );
   updateUI();
   }
 
@@ -29,8 +30,8 @@ const getWeather = async (baseURL, zip, apiKey) => {
     
     const response = await fetch (baseURL+zip+apiKey)
     try{
-       const data = await response.json();
-       return data;
+       const getWeather = await response.json();
+       return getWeather;
     }catch(error){
        console.log("error", error);
     }
